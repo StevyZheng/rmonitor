@@ -9,11 +9,14 @@ import (
 
 type Host struct {
 	BaseModel
-	HostName string `json:"hostName" bson:"hostName,omitempty"`
-	BmcIp    string `json:"bmcIp" bson:"bmcIp,omitempty"`
-	BmcMac   string `json:"bmcMac" bson:"bmcMac,omitempty"`
-	BmcUser  string `json:"bmcUser" bson:"bmcUser,omitempty"`
-	BmcPwd   string `json:"bmcPwd" bson:"bmcPwd,omitempty"`
+	CustomName  string `json:"customName" bson:"customName,omitempty"`
+	HostName    string `json:"hostName" bson:"hostName,omitempty"`
+	BmcIp       string `json:"bmcIp" bson:"bmcIp,omitempty"`
+	BmcMac      string `json:"bmcMac" bson:"bmcMac,omitempty"`
+	BmcUser     string `json:"bmcUser" bson:"bmcUser,omitempty"`
+	BmcPwd      string `json:"bmcPwd" bson:"bmcPwd,omitempty"`
+	SysManageIp string `json:"sysManageIp" bson:"sysManageIp,omitempty"`
+	IsOobActive bool   `json:"isOobActive" bson:"isOobActive,omitempty"`
 }
 
 func (r Host) List() (hosts []Host, err error) {

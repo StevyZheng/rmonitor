@@ -13,8 +13,8 @@ import (
 )
 
 type MDatabase struct {
-	Client *mongo.Client
-	DB     *mongo.Database
+	Client  *mongo.Client
+	DB      *mongo.Database
 	Context context.Context
 }
 
@@ -32,7 +32,7 @@ func NewMDB(serverIP string, port int, dbName string) (*MDatabase, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	opts := options.Client().ApplyURI(connString)
-	opts.SetAuth(options.Credential{AuthMechanism: "SCRAM-SHA-1", AuthSource: "manager", Username: "admin", Password: "000000"})
+	opts.SetAuth(options.Credential{AuthMechanism: "SCRAM-SHA-1", AuthSource: "rmonitor", Username: "stevy", Password: "000000"})
 	opts.SetMaxPoolSize(64)
 	client, err := mongo.Connect(ctx, opts)
 	if err != nil {
