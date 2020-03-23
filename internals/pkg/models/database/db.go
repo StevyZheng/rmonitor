@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/Kamva/mgm/v2"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -11,6 +12,12 @@ import (
 	"net/url"
 	"time"
 )
+
+func InitDB(dbName string, host string, port string, dbUser string, dbPwd string) (err error) {
+	dbUrl := fmt.Sprintf("mongodb://%s:%s@%s:%s/?authSource=%s", dbUser, dbPwd, host, port, dbName)
+	err = mgm.SetDefaultConfig(nil, dbName, options.Client().ApplyURI(dbUrl))
+	return err
+}
 
 type MDatabase struct {
 	Client  *mongo.Client

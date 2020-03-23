@@ -3,6 +3,7 @@ package routers
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"rmonitor/internals/app/middleware"
 	"rmonitor/internals/app/routers/initer"
 	v1 "rmonitor/internals/app/routers/v1"
 )
@@ -10,6 +11,7 @@ import (
 func InitRouter() *gin.Engine {
 	gin.SetMode(gin.DebugMode)
 	router := gin.Default()
+	router.Use(middleware.Cors())
 	router.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"app":     "rmonitor",

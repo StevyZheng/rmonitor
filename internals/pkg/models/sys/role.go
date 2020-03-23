@@ -3,6 +3,7 @@ package sys
 import (
 	"context"
 	"errors"
+	"github.com/Kamva/mgm/v2"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"rmonitor/internals/pkg/models/database"
@@ -10,12 +11,17 @@ import (
 )
 
 type Role struct {
-	BaseModel
-	Name    string `json:"name" bson:"name,omitempty"`
-	Explain string `json:"explain" bson:"explain,omitempty"`
+	mgm.DefaultModel `bson:",inline"`
+	Name             string `json:"name" bson:"name,omitempty"`
+	Explain          string `json:"explain" bson:"explain,omitempty"`
 }
 
 func (r Role) List() (roles []Role, err error) {
+	role := &Role{}
+	coll := mgm.Coll(role)
+	err = coll.SimpleFind(&roles, bson.M{})
+	return roles, err
+
 	mdb, err := database.NewMDBDefault()
 	if err != nil {
 		return nil, err
